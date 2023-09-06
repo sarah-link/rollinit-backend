@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_185901) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_003711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "monsters", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "size"
     t.string "monster_type"
     t.string "alignment"
@@ -47,6 +47,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_185901) do
     t.text "damage_resistances"
     t.text "damage_vulnerabilities"
     t.text "reactions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
