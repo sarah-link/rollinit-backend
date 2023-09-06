@@ -15,6 +15,12 @@ def remove_parens_and_content(str)
   str.gsub!(/\s\([^()]*\)/, '')
 end
 
+admin_user = User.new
+admin_user.name = "Admin"
+admin_user.email = "admin@example.com"
+admin_user.save
+
+
 json = JSON.parse(File.read('lib/seeds/srd_5e_monsters.json'))
 
 json.each do |hash|
@@ -53,7 +59,7 @@ json.each do |hash|
   m.damage_resistances = hash["Damage Resistances"]
   m.damage_vulnerabilities = hash["Damage Vulnerabilities"]
   m.reactions = strip_html_tags hash["Reactions"]
+  m.user_id = 1
 
   m.save
-
 end
