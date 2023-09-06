@@ -1,5 +1,7 @@
 class MonstersController < ApplicationController
+  before_action :lookup_monster, only: %i[update show destroy]
 
+  #TODO: check that user_id is the logged in user
   def index
     if params[:user_id].present?
       render json: Monster.where(user_id: params[:user_id]).merge(Monster.where(user_id: 1))
@@ -18,14 +20,18 @@ class MonstersController < ApplicationController
   end
 
   def update
-
+      render json: @monster if @monster.update(monster_params)
   end
 
   def destroy
-
+    render json: @monster if @monster.destroy
   end
 
   private
+
+  def lookup_monster
+    @monster = Monster.find(params[:id])
+  end
 
   def monster_params
     params.permit(
