@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_07_182116) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_07_194158) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_182116) do
     t.integer "hit_points"
     t.integer "cr"
     t.integer "armor_class"
+    t.boolean "base_creature", default: false
   end
 
   create_table "users", force: :cascade do |t|

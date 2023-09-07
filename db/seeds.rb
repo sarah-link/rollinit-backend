@@ -12,7 +12,7 @@ def remove_parens_and_content(str)
   str&.gsub!(/\(.*?\)/, '')&.strip!
 end
 
-a`dmin_user = User.new(name: :Admin, email: 'admin@example.com')`
+admin_user = User.new(name: :Admin, email: 'admin@example.com')
 admin_user.save
 
 
@@ -56,6 +56,7 @@ json.each do |hash|
   c.damage_vulnerabilities = hash["Damage Vulnerabilities"]
   c.reactions = strip_html_tags hash["Reactions"]
   c.user_id = 1
+  c.base_creature = true
 
   c.save
 end
