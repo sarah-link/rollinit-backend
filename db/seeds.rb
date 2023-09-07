@@ -5,16 +5,14 @@ def strip_html_tags(str)
 end
 
 def remove_parens(str)
-  str&.tr!('()', '')&.strip!
+  str&.tr!('()', '')
 end
 
 def remove_parens_and_content(str)
   str&.gsub!(/\(.*?\)/, '')&.strip!
 end
 
-admin_user = User.new
-admin_user.name = "Admin"
-admin_user.email = "admin@example.com"
+a`dmin_user = User.new(name: :Admin, email: 'admin@example.com')`
 admin_user.save
 
 
