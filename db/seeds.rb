@@ -1,18 +1,15 @@
 require 'json'
 
 def strip_html_tags(str)
-  return nil if str == nil
-  str.gsub!(/<.*?>/, '')
+  str&.gsub!(/<.*?>/, '')&.strip!
 end
 
 def remove_parens(str)
-  return nil if str == nil
-  str.tr!('(', '').tr!(')', '')
+  str&.tr!('()', '')&.strip!
 end
 
 def remove_parens_and_content(str)
-  return nil if str == nil
-  str.gsub!(/\s\([^()]*\)/, '')
+  str&.gsub!(/\(.*?\)/, '')&.strip!
 end
 
 admin_user = User.new
@@ -30,9 +27,10 @@ json.each do |hash|
   c.creature_type = hash["meta"].split(',')[0].split[1].capitalize
   c.alignment = hash["meta"].split(',')[1].strip.capitalize
 
-  c.name = hash["name"]
   c.armor_class = remove_parens_and_content hash["Armor Class"]
-  c.hit_points = hash["Hit Points"]
+  c.hit_points = remove_parens_and_content hash["Hit Points"]
+
+  c.name = hash["name"]
   c.speed = hash["Speed"]
   c.str = hash["STR"]
   c.str_mod = remove_parens hash["STR_mod"]

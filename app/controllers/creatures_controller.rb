@@ -1,7 +1,7 @@
 class CreaturesController < ApplicationController
   before_action :lookup_creature, only: %i[update show destroy]
 
-  #TODO: check that user_id is the logged in user
+  #TODO: check that user_id is the logged in user once auth is implemented
   def index
     if params[:user_id].present?
       render json: Creature.where(user_id: params[:user_id]).merge(Creature.where(user_id: 1))
@@ -20,11 +20,19 @@ class CreaturesController < ApplicationController
   end
 
   def update
-      render json: @creature if @creature.update(creature_params)
+    if @creature.base_creature
+      render json: "Cannot update base creature", :status => 405
+    else
+      render json: @creature if @creature.update(params[:id])
+    end
   end
 
   def destroy
-    render json: @creature if @creature.destroy
+    if @creature.base_creature
+      render json: "Cannot delete base creature", :status => 405
+    else
+      render json: @creature if @creature.destroy(params[:id])
+    end
   end
 
   private
