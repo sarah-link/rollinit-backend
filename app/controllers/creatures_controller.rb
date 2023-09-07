@@ -1,45 +1,45 @@
-class MonstersController < ApplicationController
-  before_action :lookup_monster, only: %i[update show destroy]
+class CreaturesController < ApplicationController
+  before_action :lookup_creature, only: %i[update show destroy]
 
   #TODO: check that user_id is the logged in user
   def index
     if params[:user_id].present?
-      render json: Monster.where(user_id: params[:user_id]).merge(Monster.where(user_id: 1))
+      render json: Creature.where(user_id: params[:user_id]).merge(Creature.where(user_id: 1))
     else
-      render json: Monster.where(user_id: 1)
+      render json: Creature.where(user_id: 1)
     end
   end
 
   def create
-    @monster = Monster.new(monster_params)
-    render json: @monster if @monster.save
+    @creature = Creature.new(creature_params)
+    render json: @creature if @creature.save
   end
 
   def show
-    render json: Monster.find(params[:id])
+    render json: Creature.find(params[:id])
   end
 
   def update
-      render json: @monster if @monster.update(monster_params)
+      render json: @creature if @creature.update(creature_params)
   end
 
   def destroy
-    render json: @monster if @monster.destroy
+    render json: @creature if @creature.destroy
   end
 
   private
 
-  def lookup_monster
-    @monster = Monster.find(params[:id])
+  def lookup_creature
+    @creature = Creature.find(params[:id])
   end
 
-  def monster_params
+  def creature_params
     params.permit(
     %i[
     name
     user_id
     size
-    monster_type
+    creature_type
     alignment
     armor_class
     hit_points speed

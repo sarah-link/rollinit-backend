@@ -24,42 +24,42 @@ admin_user.save
 json = JSON.parse(File.read('lib/seeds/srd_5e_monsters.json'))
 
 json.each do |hash|
-  m = Monster.new
+  c = Creature.new
 
-  m.size = hash["meta"].split(',')[0].split[0].capitalize
-  m.monster_type = hash["meta"].split(',')[0].split[1].capitalize
-  m.alignment = hash["meta"].split(',')[1].strip.capitalize
+  c.size = hash["meta"].split(',')[0].split[0].capitalize
+  c.creature_type = hash["meta"].split(',')[0].split[1].capitalize
+  c.alignment = hash["meta"].split(',')[1].strip.capitalize
 
-  m.name = hash["name"]
-  m.armor_class = remove_parens_and_content hash["Armor Class"]
-  m.hit_points = hash["Hit Points"]
-  m.speed = hash["Speed"]
-  m.str = hash["STR"]
-  m.str_mod = remove_parens hash["STR_mod"]
-  m.dex = hash["DEX"]
-  m.dex_mod = remove_parens hash["DEX_mod"]
-  m.con = hash["CON"]
-  m.con_mod = remove_parens hash["CON_mod"]
-  m.int = hash["INT"]
-  m.int_mod = remove_parens hash["INT_mod"]
-  m.wis = hash["WIS"]
-  m.wis_mod = remove_parens hash["WIS_mod"]
-  m.cha = hash["CHA"]
-  m.cha_mod = remove_parens hash["CHA_mod"]
-  m.saving_throws = hash["Saving Throws"]
-  m.skills = hash["Skills"]
-  m.senses = hash["Senses"]
-  m.languages = hash["Languages"]
-  m.cr = remove_parens_and_content hash["Challenge"]
-  m.traits = strip_html_tags hash["Traits"]
-  m.actions = strip_html_tags hash["Actions"]
-  m.legendary_actions = strip_html_tags hash["Legendary Actions"]
-  m.damage_immunities = hash["Damage Immunities"]
-  m.condition_immunities = hash["Condition Immunities"]
-  m.damage_resistances = hash["Damage Resistances"]
-  m.damage_vulnerabilities = hash["Damage Vulnerabilities"]
-  m.reactions = strip_html_tags hash["Reactions"]
-  m.user_id = 1
+  c.name = hash["name"]
+  c.armor_class = remove_parens_and_content hash["Armor Class"]
+  c.hit_points = hash["Hit Points"]
+  c.speed = hash["Speed"]
+  c.str = hash["STR"]
+  c.str_mod = remove_parens hash["STR_mod"]
+  c.dex = hash["DEX"]
+  c.dex_mod = remove_parens hash["DEX_mod"]
+  c.con = hash["CON"]
+  c.con_mod = remove_parens hash["CON_mod"]
+  c.int = hash["INT"]
+  c.int_mod = remove_parens hash["INT_mod"]
+  c.wis = hash["WIS"]
+  c.wis_mod = remove_parens hash["WIS_mod"]
+  c.cha = hash["CHA"]
+  c.cha_mod = remove_parens hash["CHA_mod"]
+  c.saving_throws = hash["Saving Throws"]
+  c.skills = hash["Skills"]
+  c.senses = hash["Senses"]
+  c.languages = hash["Languages"]
+  c.cr = remove_parens_and_content hash["Challenge"]
+  c.traits = strip_html_tags hash["Traits"]
+  c.actions = strip_html_tags hash["Actions"]
+  c.legendary_actions = strip_html_tags hash["Legendary Actions"]
+  c.damage_immunities = hash["Damage Immunities"]
+  c.condition_immunities = hash["Condition Immunities"]
+  c.damage_resistances = hash["Damage Resistances"]
+  c.damage_vulnerabilities = hash["Damage Vulnerabilities"]
+  c.reactions = strip_html_tags hash["Reactions"]
+  c.user_id = 1
 
-  m.save
+  c.save
 end
