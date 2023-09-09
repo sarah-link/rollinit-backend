@@ -1,22 +1,9 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
-RSpec.describe 'Creatures', type: :request do
-  shared_examples 'a successful response' do
-    it 'is successful' do
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  shared_examples 'a bad response' do
-    it 'returns a 404' do
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(response).to have_http_status(404)
-    end
-  end
-
+RSpec.describe 'Creatures#index', type: :request do
   describe 'GET /index' do
     let!(:admin) { FactoryBot.create :user, id: 1, name: 'Admin' }
     let!(:active_user) { FactoryBot.create :user }
@@ -72,29 +59,6 @@ RSpec.describe 'Creatures', type: :request do
 
         it_behaves_like 'a bad response'
       end
-    end
-  end
-
-  describe 'GET /show' do
-    let!(:admin) { FactoryBot.create :user, id: 1, name: 'Admin' }
-    let!(:creature) { FactoryBot.create :creature, { base_creature: true, user_id: admin.id } }
-
-    context 'with an existing creature id' do
-      before do
-        get "/creatures/#{creature.id}"
-      end
-
-      it_behaves_like 'a successful response'
-
-      it 'renders the creature' do
-        expect(JSON.parse(response.body)).to eq(creature.as_json)
-      end
-    end
-
-    context 'with a nonexistent creature id' do
-      before { get '/creatures/99' }
-
-      it_behaves_like 'a bad response'
     end
   end
 end
