@@ -1,0 +1,12 @@
+AllCops:
+  Exclude:
+    - 'bin/bundle'
+    - 'db/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
